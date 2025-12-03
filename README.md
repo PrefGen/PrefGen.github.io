@@ -1,4 +1,4 @@
-# Learning User Preferences for Image Generation Models
+# PrefGen: Multimodal Preference Learning for Preference-Conditioned Image Generation
 
 This website is adapted from [Nerfies website](https://nerfies.github.io/).
 
