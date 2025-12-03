@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Learning User Preferences for Image Generation Models</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/icon2.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <!-- 引入 MathJax 用于渲染 LaTeX 数学公式 -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+  <script type="text/javascript"
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">PrefGen: Multimodal Preference Learning for Preference-Conditioned Image Generation</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://mowenyii.github.io/">Wenyi Mo</a><sup>1</sup>,</span>
+
+            <span class="author-block">
+              <a href="https://github.com/tyz1994">Tianyu Zhang</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="http://ylbai.me/">Yalong Bai</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://phymhan.github.io/">Ligong Han</a><sup>3</sup>,</span>
+              <span class="author-block">
+                <a href="https://github.com/BarretBa">Ying Ba</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://people.cs.rutgers.edu/~dnm/">Dimitris N. Metaxas</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Rutgers University,</span>
+            <span class="author-block"><sup>2</sup>iN2X,</span>
+            <span class="author-block"><sup>3</sup>Red Hat</span>
+          </div>
+
+
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2508.08220"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2508.08220"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+      
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/Mowenyii/PrefGen"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (Coming Soon)</span>
+                  </a>
+              </span>
+              <!-- Model Link. -->
+              <span class="link-block">
+                <a href="https://huggingface.co/wenyii/PrefGen"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <!-- <i class="far fa-images"></i> -->
+                      <p style="font-size:18px">🤗</p>
+                      <!-- 🔗 -->
+                  </span>
+                  <span>Model (Coming Soon)</span>
+                </a>
+              </span> 
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://huggingface.co/datasets/wenyii/PrefGen/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data (Coming Soon)</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+
+
+
+
+    
+
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <!-- <p>Preference-conditioned image generation seeks to adapt generative models to individual users, producing outputs that reflect personal aesthetic choices beyond the given textual prompt. Despite recent progress, existing approaches either fail to capture nuanced user preferences or lack effective mechanisms to encode personalized visual signals.
+          </p>
+          <p>
+            In this work, we propose a multimodal framework that leverages multimodal large language models (MLLMs) to extract rich user representations and inject them into diffusion-based image generation. We train the MLLM with a preference-oriented visual question answering task to capture fine-grained semantic cues. To isolate preference-relevant features, we introduce two complementary probing tasks: inter-user discrimination to distinguish between different users, and intra-user discrimination to separate liked from disliked content. To ensure compatibility with diffusion text encoders, we design a maximum mean discrepancy-based alignment loss that bridges the modality gap while preserving multimodal structure. The resulting embeddings are used to condition the generator, enabling faithful adherence to both prompts and user preferences.
+          </p>
+          <p>Extensive experiments demonstrate that our method substantially outperforms strong baselines in both image quality and preference alignment, highlighting the effectiveness of representation extraction and alignment for personalized generation.
+          </p> -->
+          <p>Preference-conditioned image generation aims to produce images that reflect a user's aesthetics in addition to prompt semantics. PrefGen leverages a fine-tuned multimodal LLM to extract preference-aware embeddings from a few liked/disliked images, decomposes user signals into identity and semantic components, aligns semantic component distributionally to diffusion text embeddings via an MMD loss, and injects a fused user representation into a diffusion backbone to guide generation. The pipeline yields improved fidelity and stronger alignment to user preferences across automatic metrics and human studies. </p>
+    
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-justified">
+          <div class="content has-text-centered">
+            <img src="static/images/method.png" alt="Overview of our MLLM-based preference learning framework." width="100%"/>
+            <p> Figure 1: Overview of our MLLM-based preference learning framework.</span>
+          </div>
+    
+
+          </p>
+          <ol>
+            <li><strong>MLLM training:</strong> Fine-tune an MLLM on a preference-oriented VQA dataset — this helps the model learn multi-image preference reasoning. </li>
+      
+            <li><strong>Layer probing & embedding extraction:</strong>
+              <ul>
+                <li><code>e<sub>sem</sub></code>: extracted from the top 4 layers (last-token pooling) — captures like/dislike semantics and styles used for aligning to text space. </li>
+                <li><code>e<sub>core</sub></code>: middle-to-upper layer embeddings — capture stable user identity signals that generalize across prompts. </li>
+              </ul>
+            </li>
+      
+            <li><strong>Distribution alignment:</strong> Map <code>e<sub>sem</sub></code> through a small MLP and minimize MMD against paired CLIP text embeddings (attributes). Distribution-level loss preserves diversity and avoids collapse that point-wise losses can cause.  </li>
+      
+            <li><strong>Fusion & conditioning:</strong> Form final user vector <code>e_u = [ĕ<sub>sem</sub>; e<sub>core</sub>; e<sub>img</sub>]</code>, where <code>e<sub>img</sub></code> is a CLIP image embedding from a liked example. Inject into the diffusion UNet via a parallel user cross-attention branch. </li>
+          </ol>
+      </div> 
+
+
+
+
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- DATA & BENCHMARKS -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+    <h2 class="title is-3">Data & Benchmarks</h2>
+    <div class="content has-text-justified">
+      <p>
+        <strong>Agent dataset</strong>: ~990,998 generated images from 50,153 simulated users (each agent has ~50 attributes; 
+        we sample like/dislike pairs). This large-scale synthetic dataset provides controlled and diverse preference signals, 
+        enabling robust training of our preference extraction and alignment modules.
+      </p>
+      <div class="content has-text-centered">
+        <img src="static/images/data1.png" alt="" width="80%"/>
+        <p> Figure 2: Examples from the agent (synthetic) dataset.</p>
+      </div>
+      <p>
+        <strong>Processed Pick-a-Pic (Real users)</strong>:  
+        We additionally build a cleaned and standardized split from the <em>Pick-a-Pic</em> dataset, 
+        which contains preference choices from <strong>real human users</strong> over images generated by multiple diffusion models.  
+        Raw Pick-a-Pic contains noisy, single-step preferences, so we perform a multi-stage processing pipeline:
+        <ul>
+          <li>remove low-quality or inconsistent entries,</li>
+          <li>group samples by real user ID to construct reliable preference histories,</li>
+          <li>aggregate multiple pairwise choices into like/dislike sets,</li>
+          <li>ensure each user has enough images to form a meaningful preference profile.</li>
+        </ul>
+
+      </p>
+    
+
+    
+      <div class="content has-text-centered">
+        <img src="static/images/data2.png" alt="" width="80%"/>
+        <p> Figure 3: Examples from the processed Pick-a-Pic dataset (real users).</p>
+      </div>
+    </div>
+    
+  </div>
+  </div>
+  </div>
+</section>
+
+<!-- RESULTS SECTION -->
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 mathvista">Experiment Results</h1>
+  </div>
+</section>
+
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+
+
+    <div class="columns is-centered m-6">
+      <div class="column is-full has-text-centered content">
+        <!-- <h2 class="title is-3">Personalizing Generation with User Preferences</h2> -->
+
+        <div class="content has-text-centered">
+          <img src="static/images/res2.png" alt="data-composition" style="max-width: 80%;"/>
+          <p class="content has-text-justified">Figure 4: Examples include product design, character design, creative ideation, and personalized avatar / character cloning — PrefGen can adapt to both stylistic and semantic preferences from few-shot histories.</p>
+        </div>
+        
+
+
+        <br>
+        <br>
+        <div class="content has-text-centered">
+          <img src="static/images/res3.png" alt="data-composition" style="max-width: 80%;"/>
+          <p class="content has-text-justified">Figure 5: 
+            The images generated by PrefGen. Each example shows user history preference on the
+left, the text prompt in the middle, and results from PrefGen on the right. Our approach adapts to
+user-specific aesthetic signals, generating outputs that more faithfully reflect the preference history
+          </p>
+        
+        </div>
+        <br>
+        <div class="content has-text-centered">
+          <img src="static/images/res1.png" alt="data-composition" style="max-width: 80%;"/>
+          <p class="content has-text-justified">Figure 6: Qualitative comparison with different methods. Each row shows the user’s preference
+            and outputs from different approaches. PrefGen consistently captures both stylistic and semantic
+            aspects of user preference, while others often fail to balance preference alignment and prompt fidelity
+          </p>
+        
+        </div>
+
+
+
+      </div>
+    </div>
+
+
+        <div class="columns is-centered m-6">
+      <div class="column is-full has-text-centered content">
+        <h2 class="title is-3"> </h2>
+        <div class="content has-text-centered">
+          <img src="static/images/tab1.png" alt="data-composition" style="max-width: 90%;"/>
+          <p>Table 1: PrefGen achieves the best combination of image quality and preference alignment.</p>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+<footer class="footer">
+  <div class="container">
+
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is adapted from <a
+              href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
